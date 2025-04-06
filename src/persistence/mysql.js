@@ -21,7 +21,7 @@ async function init() {
     const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
     const database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
 
-    await waitPort({ host, port : 3308});
+    await waitPort({ host, port : 3306});
 
     pool = mysql.createPool({
         connectionLimit: 5,
@@ -29,7 +29,7 @@ async function init() {
         user,
         password,
         database,
-        port:3308, //ubah port 3308
+        //port:3308, //ubah port 3308
         charset: 'utf8mb4',
     });
 
