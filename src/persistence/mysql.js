@@ -29,6 +29,7 @@ async function init() {
         user,
         password,
         database,
+        port:3308, //ubah port 3308
         charset: 'utf8mb4',
     });
 
