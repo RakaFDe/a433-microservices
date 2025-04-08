@@ -4,17 +4,17 @@ services:
     ports:
       - "8080:8080" #remap port external 8080
     depends_on:
-      - item-db
+      - item-db #menunggu untuk service item-db
     environment:
       NODE_ENV: production
       DB_HOST: item-db
-    restart: always
+    restart: always #untuk selalu menjalankan ulang
 
   item-db:
     image: mongo:3 #image mongo
     volumes:
       - app-db:/data/db #volum yang diarahkan ke /data/db
-    restart: always
+    restart: always #untuk selalu menjalankan ulang
 
 volumes:
   app-db:
