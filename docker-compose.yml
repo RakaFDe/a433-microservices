@@ -1,0 +1,22 @@
+version: "3.8"  # Versi 3.8 
+
+services:
+  item-app:
+    image: rakafd/item-app:v1  # namaimage
+    ports:
+      - "8081:80" #remap port external 8081
+    depends_on:
+      - item-db
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+    restart: always
+
+  item-db:
+    image: mongo:3 #image mongo
+    volumes:
+      - app-db:/data/db #volum yang diarahkan ke /data/db
+    restart: always
+
+volumes:
+  app-db:
