@@ -2,7 +2,7 @@ services:
   item-app:
     image: rakafd/item-app:v1  # namaimage
     ports:
-      - "8080:80" #remap port external 8080
+      - "8080:8080" #remap port external 8080
     depends_on:
       - item-db
     environment:
