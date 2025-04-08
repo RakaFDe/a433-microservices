@@ -1,5 +1,3 @@
-version: "3.8"  # Versi 3.8 
-
 services:
   item-app:
     image: rakafd/item-app:v1  # namaimage
