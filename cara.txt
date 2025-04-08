@@ -1,0 +1,2 @@
+ubah file shell execute =chmod +x build_push_image.sh
+jalankan = ./build_push_image.sh
