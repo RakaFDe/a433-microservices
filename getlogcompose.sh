@@ -1,0 +1,1 @@
+docker-compose logs --tail=100 > docker_log_compose.txt
