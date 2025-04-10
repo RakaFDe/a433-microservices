@@ -1,1 +1,2 @@
-docker-compose logs --tail=100 > docker_log_compose.txt
+#docker-compose logs --tail=500 > docker_log_compose.txt
+docker-compose logs  > docker_log_compose.txt

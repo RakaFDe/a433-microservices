@@ -7,8 +7,8 @@ TAG="v1"
 DOCKERHUB_USERNAME="rakafd"
 GITHUB_USERNAME="rakafde"
 
-DOCKERHUB_IMAGE_NAME="$DOCKERHUB_USERNAME/$LOCAL_IMAGE_NAME:$TAG"
-GHCR_IMAGE_NAME="ghcr.io/$GITHUB_USERNAME/$LOCAL_IMAGE_NAME:$TAG"
+DOCKERHUB_IMAGE_NAME="$DOCKERHUB_USERNAME/$LOCAL_IMAGE_NAME:$TAG" 
+GHCR_IMAGE_NAME="ghcr.io/$GITHUB_USERNAME/$LOCAL_IMAGE_NAME:$TAG" 
 
 echo "Membuat Docker iameg $LOCAL_IMAGE_NAME:$TAG..."
 docker build -t $LOCAL_IMAGE_NAME:$TAG . #membuild docker dengan data item-app:v1
@@ -34,20 +34,20 @@ docker login
 echo "coba u[pload"
 docker push $DOCKERHUB_IMAGE_NAME #docker push image ke docker hub
 
-# Cek apakah sudah login ke GHCR
+# cek login gihtub package
 if grep -q "ghcr.io" ~/.docker/config.json 2>/dev/null; then
-  echo "✅ Sudah login ke GHCR."
+  echo "Sudah login github"
 else
-  echo "🔐 Login ke GHCR..."
-  echo "Masukkan GitHub Token (bisa dibuat dari: https://github.com/settings/tokens)"
+  echo "Login ke github"
   read -s -p "GitHub Token: " GITHUB_TOKEN
   echo
   echo "$GITHUB_TOKEN" | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
 fi
 
-# Push ke GHCR
-echo "📤 Push image ke GHCR..."
+# push ke github packaeg
+echo "push image package"
 docker push $GHCR_IMAGE_NAME
 
 
-echo "Selesai. Image tersedia di: https://hub.docker.com/r/$DOCKERHUB_USERNAME/$LOCAL_IMAGE_NAME/tags"  #untuk menampilkan alamat dockerhub yang sudah teruplaod tadi
+echo "Selesai image ada di https://hub.docker.com/r/$DOCKERHUB_USERNAME/$LOCAL_IMAGE_NAME/tags"  #untuk menampilkan alamat dockerhub yang sudah teruplaod tadi
+echo "untuk github ada di  https://github.com/rakaFDe?tab=packages"
