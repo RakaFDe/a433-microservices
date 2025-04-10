@@ -10,3 +10,5 @@ docker compose down --volumes #buang volume
 docker compose logs --no-color --timestamps > log.txt
 docker compose logs item-app > log.txt
 docker-compose logs > log.txt
+
+git restore build_push_image.sh
