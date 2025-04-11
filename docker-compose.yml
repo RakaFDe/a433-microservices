@@ -2,12 +2,9 @@ services:
   item-app:
     image: rakafd/item-app:v1  # namaimage
     ports:
-      - "8080:8080" #remap port external 8080
+      - "80:80" #remap port 80 karena untuk port 80 sudah dipakai nginx saya sebelumnya tapi saya matikan sementara
     depends_on:
       - item-db #menunggu untuk service item-db
-    environment:
-      NODE_ENV: production
-      DB_HOST: item-db
     restart: always #untuk selalu menjalankan ulang
 
   item-db:
