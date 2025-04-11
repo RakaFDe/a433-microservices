@@ -1,0 +1,36 @@
+item-app-1  | 
+item-app-1  | > docker-software-delivery@1.0.0 start /app
+item-app-1  | > node ./bin/www
+item-app-1  | 
+item-app-1  | NODE_ENV: production
+item-app-1  | Connected to database
+item-db-1   | 2025-04-10T15:25:43.391+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=52a9cb44d448
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] db version v3.6.23
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] git version: d352e6a4764659e0d0350ce77279de3c1f243e5c
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] modules: none
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] build environment:
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten]     distarch: x86_64
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+item-db-1   | 2025-04-10T15:25:43.392+0000 I CONTROL  [initandlisten] options: { net: { bindIpAll: true } }
+item-db-1   | 2025-04-10T15:25:43.393+0000 I -        [initandlisten] Detected data files in /data/db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+item-db-1   | 2025-04-10T15:25:43.393+0000 I STORAGE  [initandlisten] 
+item-db-1   | 2025-04-10T15:25:43.393+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+item-db-1   | 2025-04-10T15:25:43.394+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+item-db-1   | 2025-04-10T15:25:43.394+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3456M,cache_overflow=(file_max=0M),session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+item-db-1   | 2025-04-10T15:25:43.984+0000 I STORAGE  [initandlisten] WiredTiger message [1744298743:984108][1:0x7f5205cfba40], txn-recover: Main recovery loop: starting at 7/18048
+item-db-1   | 2025-04-10T15:25:44.035+0000 I STORAGE  [initandlisten] WiredTiger message [1744298744:35848][1:0x7f5205cfba40], txn-recover: Recovering log 7 through 8
+item-db-1   | 2025-04-10T15:25:44.082+0000 I STORAGE  [initandlisten] WiredTiger message [1744298744:82342][1:0x7f5205cfba40], txn-recover: Recovering log 8 through 8
+item-db-1   | 2025-04-10T15:25:44.108+0000 I STORAGE  [initandlisten] WiredTiger message [1744298744:108484][1:0x7f5205cfba40], txn-recover: Set global recovery timestamp: 0
+item-db-1   | 2025-04-10T15:25:44.130+0000 I CONTROL  [initandlisten] 
+item-db-1   | 2025-04-10T15:25:44.130+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+item-db-1   | 2025-04-10T15:25:44.130+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+item-db-1   | 2025-04-10T15:25:44.130+0000 I CONTROL  [initandlisten] 
+item-db-1   | 2025-04-10T15:25:44.145+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+item-db-1   | 2025-04-10T15:25:44.146+0000 I NETWORK  [initandlisten] listening via socket bound to 0.0.0.0
+item-db-1   | 2025-04-10T15:25:44.146+0000 I NETWORK  [initandlisten] listening via socket bound to /tmp/mongodb-27017.sock
+item-db-1   | 2025-04-10T15:25:44.147+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+item-db-1   | 2025-04-10T15:25:44.201+0000 I NETWORK  [listener] connection accepted from 172.20.0.3:52206 #1 (1 connection now open)
+item-db-1   | 2025-04-10T15:25:44.206+0000 I NETWORK  [conn1] received client metadata from 172.20.0.3:52206 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "5.15.0-136-generic" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
