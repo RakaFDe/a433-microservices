@@ -26,11 +26,12 @@ item-db-1  | 2025-04-11T12:27:18.841006740Z 2025-04-11T12:27:18.840+0000 I NETWO
 item-db-1  | 2025-04-11T12:27:18.841152895Z 2025-04-11T12:27:18.841+0000 I NETWORK  [initandlisten] listening via socket bound to /tmp/mongodb-27017.sock
 item-db-1  | 2025-04-11T12:27:18.841279532Z 2025-04-11T12:27:18.841+0000 I STORAGE  [LogicalSessionCacheRefresh] createCollection: config.system.sessions with generated UUID: 97606c45-1a4d-458f-b46e-36882ea3ed8d
 item-db-1  | 2025-04-11T12:27:18.841330979Z 2025-04-11T12:27:18.841+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
-item-db-1  | 2025-04-11T12:27:18.854630659Z 2025-04-11T12:27:18.854+0000 I INDEX    [LogicalSessionCacheRefresh] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
-item-db-1  | 2025-04-11T12:27:18.854656147Z 2025-04-11T12:27:18.854+0000 I INDEX    [LogicalSessionCacheRefresh] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-item-db-1  | 2025-04-11T12:27:18.855453155Z 2025-04-11T12:27:18.855+0000 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
-item-db-1  | 2025-04-11T12:27:19.329804565Z 2025-04-11T12:27:19.329+0000 I NETWORK  [listener] connection accepted from 172.20.0.3:51804 #1 (1 connection now open)
-item-db-1  | 2025-04-11T12:27:19.337236620Z 2025-04-11T12:27:19.336+0000 I NETWORK  [conn1] received client metadata from 172.20.0.3:51804 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "5.15.0-136-generic" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
+item-db-1   | 2025-04-11T12:27:18.854630659Z 2025-04-11T12:27:18.854+0000 I INDEX    [LogicalSessionCacheRefresh] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
+item-db-1   | 2025-04-11T12:27:18.854656147Z 2025-04-11T12:27:18.854+0000 I INDEX    [LogicalSessionCacheRefresh] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+item-db-1   | 2025-04-11T12:27:18.855453155Z 2025-04-11T12:27:18.855+0000 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
+item-db-1   | 2025-04-11T12:27:19.329804565Z 2025-04-11T12:27:19.329+0000 I NETWORK  [listener] connection accepted from 172.20.0.3:51804 #1 (1 connection now open)
+item-db-1   | 2025-04-11T12:27:19.337236620Z 2025-04-11T12:27:19.336+0000 I NETWORK  [conn1] received client metadata from 172.20.0.3:51804 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "5.15.0-136-generic" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
+item-db-1   | 2025-04-11T12:29:58.975294953Z 2025-04-11T12:29:58.975+0000 I STORAGE  [conn1] createCollection: accumulator.documents with generated UUID: 2fff7045-706e-4832-bc82-e8909af7abff
 item-app-1  | 2025-04-11T12:27:19.044103153Z 
 item-app-1  | 2025-04-11T12:27:19.044193953Z > docker-software-delivery@1.0.0 start /app
 item-app-1  | 2025-04-11T12:27:19.044201247Z > node ./bin/www
@@ -45,3 +46,5 @@ item-app-1  | 2025-04-11T12:28:04.820548481Z [0mGET / [36m304 [0m1.404 ms - -
 item-app-1  | 2025-04-11T12:28:06.032161802Z [0mGET /javascripts/dist/dist.min.js [36m304 [0m12.664 ms - -[0m
 item-app-1  | 2025-04-11T12:28:06.033713308Z [0mGET /stylesheets/style.css [36m304 [0m14.972 ms - -[0m
 item-app-1  | 2025-04-11T12:28:06.774866913Z [0mGET /api [36m304 [0m2.360 ms - -[0m
+item-app-1  | 2025-04-11T12:29:58.988343822Z [0mPOST /api [32m201 [0m23.119 ms - 54[0m
+item-app-1  | 2025-04-11T12:30:03.364139536Z [0mPOST /api [32m201 [0m5.682 ms - 55[0m
