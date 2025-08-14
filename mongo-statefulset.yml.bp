@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: mongo-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      terminationGracePeriodSeconds: 20 #untuk waktu tunggu up
+      containers:
+        - name: mongo
+          image: mongo:6
+          ports:
+            - containerPort: 27017
+          command: ["mongod", "--config", "/config/mongo.conf"]
+          env: #sesuai keterangan bagian environment variable
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          volumeMounts: #seusia keterangan bagian volume mount
+            - name: mongo-data
+              mountPath: /data/db
+            - name: mongo-config-volume
+              mountPath: /config
+            - name: mongo-secret-volume
+              mountPath: /etc/mongo-credentials
+              readOnly: true
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+        - name: mongo-config-volume
+          configMap:
+            name: mongo-config
+        - name: mongo-secret-volume
+          secret:
+            secretName: mongo-secret
+
+#  volumeClaimTemplates:
+#    - metadata:
+#        name: mongo-persistent-storage
+#      spec:
+#        accessModes: ["ReadWriteOnce"]
+#        storageClassName: manual
+#        resources:
+#          requests:
+#            storage: 1Gi

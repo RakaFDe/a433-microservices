@@ -1,0 +1,14 @@
+# 1. Buat secret berisi credential MongoDB
+kubectl apply -f mongo-secret.yml
+
+# 2. Buat configmap berisi file konfigurasi mongo.conf
+kubectl apply -f mongo-configmap.yml
+
+# 3. Buat PersistentVolume dan PersistentVolumeClaim manual
+kubectl apply -f mongo-pv-pvc.yml
+
+# 4. Buat Service (headless) untuk MongoDB StatefulSet
+kubectl apply -f mongo-service.yml
+
+# 5. Deploy MongoDB dengan StatefulSet
+kubectl apply -f mongo-statefulset.yml

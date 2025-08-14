@@ -3,53 +3,55 @@ kind: StatefulSet
 metadata:
   name: mongo
 spec:
-  serviceName: mongo-service
+  serviceName: "mongo"
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb
+      app: mongo
   template:
     metadata:
       labels:
-        app: mongodb
+        app: mongo
     spec:
-      terminationGracePeriodSeconds: 20 #untuk waktu tunggu up
+      terminationGracePeriodSeconds: 20
       containers:
         - name: mongo
-          image: mongo:6
+          image: mongo:6.0
           ports:
             - containerPort: 27017
-          command: ["mongod", "--config", "/config/mongo.conf"]
-          env: #sesuai keterangan bagian environment variable
+              name: mongo
+          env:
             - name: MONGO_INITDB_ROOT_USERNAME_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
             - name: MONGO_INITDB_ROOT_PASSWORD_FILE
               value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
-          volumeMounts: #seusia keterangan bagian volume mount
+          volumeMounts:
             - name: mongo-data
               mountPath: /data/db
-            - name: mongo-config-volume
+            - name: mongo-config
               mountPath: /config
-            - name: mongo-secret-volume
+            - name: mongo-secret
               mountPath: /etc/mongo-credentials
               readOnly: true
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
       volumes:
-        - name: mongo-data
-          persistentVolumeClaim:
-            claimName: mongo-pvc
-        - name: mongo-config-volume
+        - name: mongo-config
           configMap:
             name: mongo-config
-        - name: mongo-secret-volume
+        - name: mongo-secret
           secret:
             secretName: mongo-secret
-
-#  volumeClaimTemplates:
-#    - metadata:
-#        name: mongo-persistent-storage
-#      spec:
-#        accessModes: ["ReadWriteOnce"]
-#        storageClassName: manual
-#        resources:
-#          requests:
-#            storage: 1Gi
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

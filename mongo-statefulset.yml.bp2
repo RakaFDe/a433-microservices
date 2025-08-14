@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: mongo-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      terminationGracePeriodSeconds: 20 # waktu tunggu sebelum stop
+      containers:
+        - name: mongo
+          image: mongo:6
+          ports:
+            - containerPort: 27017
+          command: ["mongod", "--config", "/config/mongo.conf"]
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
+            - name: mongo-config-volume
+              mountPath: /config
+            - name: mongo-secret-volume
+              mountPath: /etc/mongo-credentials
+              readOnly: true
+            - name: mongo-init-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+        - name: mongo-config-volume
+          configMap:
+            name: mongo-config
+        - name: mongo-secret-volume
+          secret:
+            secretName: mongo-secret
+        - name: mongo-init-script
+          configMap:
+            name: mongo-init-script
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-init-script
+data:
+  init.js: |
+    db = db.getSiblingDB('karsajobs');
+    db.createUser({
+      user: "appuser",
+      pwd: "apppassword",
+      roles: [ { role: "readWrite", db: "karsajobs" } ]
+    });

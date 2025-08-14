@@ -6,3 +6,6 @@ data:
   mongo.conf: |
     storage:
       dbPath: /data/db
+    net:
+      bindIp: 0.0.0.0
+      port: 27017
