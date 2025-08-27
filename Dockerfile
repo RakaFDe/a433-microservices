@@ -1,5 +1,8 @@
+#jika image belum ada bisa pullpakai
+#docker pull node:16-alpine / lalu cek docker run -it node:16-alpine sh
+
 #build vue
-FROM node:14.21-alpine AS builder
+FROM node:16-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
