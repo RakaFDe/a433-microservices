@@ -1,3 +1,4 @@
+.env
 backend
 build_push_backend.sh
 build_push_frontend.sh
