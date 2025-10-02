@@ -7,3 +7,4 @@ build_push_image_karsajobs_ui.sh
 frontend
 kubernetes
 tree.txt
+.env
