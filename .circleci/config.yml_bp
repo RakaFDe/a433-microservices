@@ -43,5 +43,4 @@ workflows:
               only: karsajobs-ui #jika commit push ke branch frontend
       - build-backend:
           filters: #branchfilter
-            branches:
               only: karsajobs #nama branch backend pada repo
