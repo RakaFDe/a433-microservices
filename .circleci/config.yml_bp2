@@ -40,8 +40,8 @@ workflows:
       - build-frontend: #jalankan job frontend
           filters: #branch filter
             branches:
-              only: dev #jika commit push ke branch dev(gabungan frontend dan backend
+              only: karsajobs-ui #jika commit push ke branch frontend
       - build-backend:
-          filters:
+          filters: #branchfilter
             branches:
-              only: dev
+              only: karsajobs #nama branch backend pada repo
