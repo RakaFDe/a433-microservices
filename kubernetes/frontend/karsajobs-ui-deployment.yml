@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-ui
+  namespace: karsajob
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+  template:
+    metadata:
+      labels:
+        app: karsajobs-ui
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: karsajobs-ui
+          image: ghcr.io/rakafde/karsajobs-ui:latest
+          imagePullPolicy: Always #untuk image terbaru
+          ports:
+            - containerPort: 8000
+              name: http-metrics #agar di scrape prometheus
+          env:
+            - name: VUE_APP_BACKEND
+              value: "http://rakafitrap.com/k8sapi"
+#            - name: VUE_APP_BACKEND_URL
+#              value: "http://karsajobs" # nama service backend

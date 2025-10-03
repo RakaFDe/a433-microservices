@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: karsajob-ingress
+  namespace: karsajob #default sesuai namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: rakafitrap.com
+    http:
+      paths:
+      - path: /backend #/api
+        pathType: Prefix
+        backend:
+          service:
+            name: karsajobs #karsajobs-service cek kubectl get svc -n karsajob
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: karsajobs-ui #karsajobs-ui-service cek kubectl get sv
+            port:
+              number: 80

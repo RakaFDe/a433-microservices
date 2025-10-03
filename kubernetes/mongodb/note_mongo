@@ -1,0 +1,14 @@
+jika pvc nyangkut
+cek data yang nyangkut
+kubectl get pv | grep mongo-data-mongo-0 
+
+lalu coba patch
+kubectl patch pv pvc-77e7332f-9a44-4703-a155-e069bc48f51f -p '{"spec":{"claimRef": null}}'
+
+dan coba delete lagi
+kubectl delete pvc mongo-data-mongo-0 -n karsajob
+
+hapus data db
+masuk ke pod 
+kubectl exec -it mongo-0 -n karsajob -- bash
+rm -rf /data/db/*

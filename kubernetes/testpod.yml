@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-testing
+  namespace: karsajob
+spec:
+  containers:
+  - name: pod-testing
+    image: curlimages/curl:8.7.1
+    command: ["sleep","3600"]

@@ -1,10 +1,2 @@
 .env
-backend
-build_push_backend.sh
-build_push_frontend.sh
-build_push_image_karsajobs.sh
-build_push_image_karsajobs_ui.sh
-frontend
-kubernetes
 tree.txt
-.env

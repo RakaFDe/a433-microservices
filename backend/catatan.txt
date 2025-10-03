@@ -1,0 +1,2 @@
+untuk folder ini menggunakan branch karsajobs 
+https://github.com/RakaFDe/a433-microservices/tree/karsajobs

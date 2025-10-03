@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karsajobs
+  namespace: karsajob
+spec:
+  type: NodePort
+  selector:
+    app: karsajobs
+  ports:
+#    - protocol: TCP
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080  # pilih port antara 30000–32767
+

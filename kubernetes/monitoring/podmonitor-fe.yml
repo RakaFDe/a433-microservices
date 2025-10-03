@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: karsajobs-ui-podmonitor
+  namespace: monitoring
+  labels:
+    release: prometheus  # sesuaikan jika Helm release kamu bukan "prometheus"
+spec:
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+  namespaceSelector:
+    matchNames:
+      - karsajob
+  podMetricsEndpoints:
+    - port: http-metrics  # ganti kalau port name di pod bukan `http`
+      path: /metrics
+      interval: 30s

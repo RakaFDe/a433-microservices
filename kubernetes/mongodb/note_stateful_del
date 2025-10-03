@@ -1,0 +1,3 @@
+kubectl delete statefulset mongo
+kubectl delete pvc mongo-pvc
+kubectl delete pv mongo-pv
