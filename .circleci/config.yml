@@ -74,10 +74,10 @@ workflows:
           filters: #filter branch
             branches:
               only: dev
-          paths: #filter path yang ada perubahan
-            only:
-              - backend/*
-              - .circleci/*
+#          paths: #filter path yang ada perubahan
+#            only:
+#              - backend/*
+#              - .circleci/*
 
       - test-backend:
           requires:
@@ -85,10 +85,10 @@ workflows:
           filters:
             branches:
               only: dev
-          paths:
-            only:
-              - backend/*
-              - .circleci/*
+#          paths:
+#            only:
+#              - backend/*
+#              - .circleci/*
 
       - build-backend:
           requires:
@@ -96,10 +96,10 @@ workflows:
           filters:
             branches:
               only: dev
-          paths:
-            only:
-              - backend/*
-              - .circleci/*
+ #         paths:
+ #           only:
+ #             - backend/*
+ #             - .circleci/*
 
 #-------------
       #frontend
@@ -107,10 +107,10 @@ workflows:
           filters:
             branches:
               only: dev
-          paths:
-            only:
-              - frontend/*
-              - .circleci/*
+ #         paths:
+ #           only:
+ #             - frontend/*
+ #             - .circleci/*
 
       - build-frontend:
           requires:
@@ -118,7 +118,7 @@ workflows:
           filters:
             branches:
               only: dev
-          paths:
-            only:
-              - frontend/*
-              - .circleci/*
+ #         paths:
+ #           only:
+ #             - frontend/*
+ #             - .circleci/*
