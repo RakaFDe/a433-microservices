@@ -3,6 +3,36 @@ version: 2.1 #versi circleci
 
 #job / task
 jobs:
+  lint-dockerfile-backend: #job untuk lint bnackend
+    docker:
+      - image: hadolint/hadolint:latest
+    steps:
+      - checkout
+      - run:
+          name: proses lint backend #nama proses/job
+          command: hadolint backend/Dockerfile #target file backend lint
+#-------------------------------------------
+
+  lint-dockerfile-frontend: #lint frontend
+    docker:
+      - image: hadolint/hadolint:latest
+    steps:
+      - checkout
+      - run:
+          name: proses lint frontend
+          command: hadolint frontend/Dockerfile
+#------------------------------------------
+
+  test-backend: #job gotest
+    docker:
+      - image: cimg/go:1.21
+    steps:
+      - checkout
+      - run:
+          name: unit test go
+          command: go test -v -short --count=1 $(go list ./backend/...) # go test
+#------------------------------------------
+
   build-frontend: #job untuk build & push imag frontend
     docker:
       - image: cimg/base:stable #base image circleci
@@ -16,6 +46,7 @@ jobs:
             FULL_IMAGE_NAME="ghcr.io/${GITHUB_USERNAME}/karsajob-ui:latest"
             docker build -t "$FULL_IMAGE_NAME" ./frontend
             docker push "$FULL_IMAGE_NAME"
+#---------------------------------------------------
 
   build-backend: #job untuk build dan push image baceknd
     docker:
@@ -30,18 +61,64 @@ jobs:
             FULL_IMAGE_NAME="ghcr.io/${GITHUB_USERNAME}/karsajobs:latest"
             docker build -t "$FULL_IMAGE_NAME" ./backend
             docker push "$FULL_IMAGE_NAME"
-
+#=======================================================================
+#=======================================================================
 
 #workflow untuk mengatur urutan /kondisi jobs
 workflows:
   version: 2
-  build-and-push:
+  dev-workflow:
     jobs:
-      - build-frontend: #jalankan job frontend
-          filters: #branch filter
+      #Backend
+      - lint-dockerfile-backend:
+          filters: #filter branch
             branches:
-              only: dev #jika commit push ke branch dev(gabungan frontend dan backend
-      - build-backend:
+              only: dev
+          paths: #filter path yang ada perubahan
+            only:
+              - backend/*
+              - .circleci/*
+
+      - test-backend:
+          requires:
+            - lint-dockerfile-backend #proses workflow sebelumnya
           filters:
             branches:
               only: dev
+          paths:
+            only:
+              - backend/*
+              - .circleci/*
+
+      - build-backend:
+          requires:
+            - test-backend
+          filters:
+            branches:
+              only: dev
+          paths:
+            only:
+              - backend/*
+              - .circleci/*
+
+#-------------
+      #frontend
+      - lint-dockerfile-frontend:
+          filters:
+            branches:
+              only: dev
+          paths:
+            only:
+              - frontend/*
+              - .circleci/*
+
+      - build-frontend:
+          requires:
+            - lint-dockerfile-frontend
+          filters:
+            branches:
+              only: dev
+          paths:
+            only:
+              - frontend/*
+              - .circleci/*

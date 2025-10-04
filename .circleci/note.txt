@@ -1,0 +1,2 @@
+config.yml_bp2 ini untuk perstruktur seperti karasjob (backend) karsajobs-ui (frontend)
+config.yml_bp3 ini untuk 1 branch (dev) dimana terdata frontend dan backend
