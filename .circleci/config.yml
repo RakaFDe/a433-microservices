@@ -35,7 +35,9 @@ jobs:
       - checkout
       - run:
           name: unit test go
-          command: go test -v -short --count=1 $(go list ./backend/...) # go test
+          command: |
+            cd backend
+            go test -v -short --count=1 $(go list ./...) # go test
 #------------------------------------------
 
   build-frontend: #job untuk build & push imag frontend
