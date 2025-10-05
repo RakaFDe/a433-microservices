@@ -1,26 +1,31 @@
 #config circle ci
 version: 2.1 #versi circleci
 
+#pakai orb circleci, seperti contoh di dokumentasi web circleci
+
+orbs:
+  docker: circleci/docker@2.6.1
+
 #job / task
 jobs:
-  lint-dockerfile-backend: #job untuk lint bnackend
-    docker:
-      - image: hadolint/hadolint:latest
-    steps:
-      - checkout
-      - run:
-          name: proses lint backend #nama proses/job
-          command: hadolint backend/Dockerfile #target file backend lint
+#  lint-dockerfile-backend: #job untuk lint bnackend
+#    docker:
+#      - image: hadolint/hadolint:latest
+#    steps:
+#      - checkout
+#      - run:
+#          name: proses lint backend #nama proses/job
+#          command: hadolint backend/Dockerfile #target file backend lint
 #-------------------------------------------
 
-  lint-dockerfile-frontend: #lint frontend
-    docker:
-      - image: hadolint/hadolint:latest
-    steps:
-      - checkout
-      - run:
-          name: proses lint frontend
-          command: hadolint frontend/Dockerfile
+#  lint-dockerfile-frontend: #lint frontend
+#    docker:
+#      - image: hadolint/hadolint:latest
+#    steps:
+#      - checkout
+#      - run:
+#          name: proses lint frontend
+#          command: hadolint frontend/Dockerfile
 #------------------------------------------
 
   test-backend: #job gotest
@@ -70,7 +75,10 @@ workflows:
   dev-workflow:
     jobs:
       #Backend
-      - lint-dockerfile-backend:
+      - docker/hadolint:
+          name: lint-backend
+          dockerfiles: backend/Dockerfile
+          hadolint_tag: 2.12.0-debian
           filters: #filter branch
             branches:
               only: dev
@@ -81,7 +89,7 @@ workflows:
 
       - test-backend:
           requires:
-            - lint-dockerfile-backend #proses workflow sebelumnya
+            - lint-backend #proses workflow sebelumnya
           filters:
             branches:
               only: dev
@@ -103,7 +111,10 @@ workflows:
 
 #-------------
       #frontend
-      - lint-dockerfile-frontend:
+      - docker/hadolint:
+          name: lint-frontend
+          dockerfiles: frontend/Dockerfile
+          hadolint_tag:2.12.0-debian
           filters:
             branches:
               only: dev
@@ -114,7 +125,7 @@ workflows:
 
       - build-frontend:
           requires:
-            - lint-dockerfile-frontend
+            - lint-frontend
           filters:
             branches:
               only: dev
