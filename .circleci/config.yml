@@ -114,7 +114,7 @@ workflows:
       - docker/hadolint:
           name: lint-frontend
           dockerfiles: frontend/Dockerfile
-          hadolint_tag:2.12.0-debian
+          hadolint_tag: 2.12.0-debian
           filters:
             branches:
               only: dev
