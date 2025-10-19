@@ -26,6 +26,7 @@ spec:
               name: http-metrics #agar di scrape prometheus
           env:
             - name: VUE_APP_BACKEND
-              value: "http://rakafitrap.com/k8sapi"
+              value: "http://be.rakafitrap.com"
+#              value: "http://rakafitrap.com/k8sapi"
 #            - name: VUE_APP_BACKEND_URL
 #              value: "http://karsajobs" # nama service backend
