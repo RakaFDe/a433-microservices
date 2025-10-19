@@ -1,2 +1,8 @@
 untuk ini diambil dari branch karsajobs-ui
 https://github.com/RakaFDe/a433-microservices/tree/karsajobs-ui
+
+tambahkan .env .env pada dockerfile (karena sebelumnya terhapus)
+lalu jalankan ulang 
+docker build -t ghcr.io/rakafde/karsajobs-ui:latest . #stepbuild
+docker push ghcr.io/rakafde/karsajobs-ui:latest 	#step push image
+kubectl rollout restart deployment karsajobs-ui -n karsajob #refresh dengan mengambil image baru
