@@ -40,7 +40,7 @@ jobs:
             go test -v -short --count=1 $(go list ./...) # go test
 #------------------------------------------
 
-  build-frontend: #job untuk build & push imag frontend
+  build-push-frontend: #job untuk build & push imag frontend
     docker:
       - image: cimg/base:stable #base image circleci
     steps:
@@ -55,7 +55,7 @@ jobs:
             docker push "$FULL_IMAGE_NAME"
 #---------------------------------------------------
 
-  build-backend: #job untuk build dan push image baceknd
+  build-push-backend: #job untuk build dan push image baceknd
     docker:
       - image: cimg/base:stable #base image circleic
     steps:
@@ -100,7 +100,7 @@ workflows:
 #              - backend/*
 #              - .circleci/*
 
-      - build-backend:
+      - build-push-backend:
           requires:
             - test-backend
           filters:
@@ -125,7 +125,7 @@ workflows:
  #             - frontend/*
  #             - .circleci/*
 
-      - build-frontend:
+      - build-push-frontend:
           requires:
             - lint-frontend
           filters:
@@ -135,3 +135,4 @@ workflows:
  #           only:
  #             - frontend/*
  #             - .circleci/*
+
