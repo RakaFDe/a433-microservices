@@ -2,44 +2,44 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: karsajobs
-  namespace: karsajob
+  namespace: karsajob      #nama namespace/group
   labels:
-    app: karsajobs
+    app: karsajobs         #nama label identitas / service slector
 spec:
-  replicas: 1
+  replicas: 1              #jumlah replika untuk deployment ini
   selector:
     matchLabels:
-      app: karsajobs
+      app: karsajobs      #nama label yang dikelola deployment
   template:
     metadata:
       labels:
-        app: karsajobs
+        app: karsajobs     #nama label yang sama dengan diatas
     spec:
       containers:
-        - name: karsajobs
-          image: ghcr.io/rakafde/karsajobs:latest
-          imagePullPolicy: Always
+        - name: karsajobs                          #nama container pod
+          image: ghcr.io/rakafde/karsajobs:latest  #image container yang akan di deploy (sesuaikan)
+          imagePullPolicy: Always                  #pengaturan untuk settingan tarik image
           ports:
-            - containerPort: 8080
-          env:
+            - containerPort: 8080                  #port aplikasi container
+          env:      #data environtment yang di butuhkan
             - name: APP_PORT
-              value: "8080"
+              value: "8080"                        #env port aplikasi
             - name: MONGO_HOST
               value: "mongo" # sama dengan servis mongondb
-            - name: MONGO_USER
+            - name: MONGO_USER                     #env untuk settingan user mongo (secret)
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
-                  key: MONGO_ROOT_USERNAME
-            - name: MONGO_PASS
+                  name: mongo-secret              #env nama secret yang digunakan mongo
+                  key: MONGO_ROOT_USERNAME        #env key secret yang digunakan mongo
+            - name: MONGO_PASS                    #env untuk settingan pass mongo (secret)
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
-                  key: MONGO_ROOT_PASSWORD
+                  name: mongo-secret              #env nama secret yang digunakan mongo
+                  key: MONGO_ROOT_PASSWORD        #env key secret yang digunakan mongo
           resources: #alokasi resource
-            requests:
+            requests:                             #aturan minimal resource
               cpu: "100m"
               memory: "128Mi"
-            limits:
+            limits:                               #aturan limit resource
               cpu: "500m"
               memory: "512Mi"

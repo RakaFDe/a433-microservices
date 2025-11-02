@@ -1,12 +1,12 @@
 apiVersion: v1
-kind: ConfigMap
+kind: ConfigMap        #service configmap
 metadata:
-  name: mongo-config
-  namespace: karsajob
-data:
+  name: mongo-config   #nama configmap
+  namespace: karsajob  #nama namespace/group
+data:                  #bagian data (konfigurasi/variable/value)
   mongo.conf: |
     storage:
-      dbPath: /data/db
+      dbPath: /data/db #path data mongo disimpan pada container
     net:
-      bindIp: 0.0.0.0
-      port: 27017
+      bindIp: 0.0.0.0  #untuk settingan mongo agar terbuka dan terkoneksi(available)
+      port: 27017      #alamat port mongo (default)

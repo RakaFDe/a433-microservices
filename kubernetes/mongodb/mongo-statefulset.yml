@@ -1,39 +1,39 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: StatefulSet          #jenis service statefulset (untuk db biasanya)
 metadata:
-  name: mongo
-  namespace: karsajob
+  name: mongo              #nama statefulset
+  namespace: karsajob      #nama namespace/group
 spec:
-  serviceName: "mongo"
-  replicas: 1
+  serviceName: "mongo"     #nama headless service
+  replicas: 1              #jumlah replika 1
   selector:
     matchLabels:
-      app: mongo
+      app: mongo          #selector untuk label (pod mongo)
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongo        #label pada pod cocok/sesuai yang diatas
     spec:
       containers:
-        - name: mongo
-          image: mongo:6.0
+        - name: mongo              #nama container
+          image: mongo:6.0         #image container
           ports:
-            - containerPort: 27017
+            - containerPort: 27017 #port container
               name: mongo
-          env:
-            - name: MONGO_INITDB_ROOT_USERNAME_FILE
-              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
-            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
-              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
-          volumeMounts:
+          env:     #env/variable/data pendukung
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE    #variable file untuk username(saat coba init awal)
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME #letak file variable username
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE    #variable file untuk password(saat init awal)
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD #letak file variable password
+          volumeMounts:       #data mounting volume ke container
             - name: mongo-persistent-storage
-              mountPath: /data/db
+              mountPath: /data/db        #lokasi mount data mongo persistence
             - name: mongo-config
-              mountPath: /config
+              mountPath: /config         #lokasi konfigurasi
             - name: mongo-secret
-              mountPath: /etc/mongo-credentials
-              readOnly: true
-      volumes:
+              mountPath: /etc/mongo-credentials  #lokasi kredensial
+              readOnly: true        #settingan secret/kredensial read only
+      volumes:      #mengdefinisikan volume yang digunakan
         - name: mongo-config
           configMap:
             name: mongo-config

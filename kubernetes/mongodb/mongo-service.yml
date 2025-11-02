@@ -1,13 +1,13 @@
 apiVersion: v1
-kind: Service
+kind: Service          #jenis service service
 metadata:
-  name: mongo
-  namespace: karsajob
+  name: mongo          #nama service
+  namespace: karsajob  #nama namespace/group
 spec:
 #  type: NodePort
   selector:
     app: mongo #kubectl get pod mongo-0 -n karsajob --show-label
-  ports:
+  ports:  #alamat port(default mongo)
     - protocol: TCP
       port: 27017
       targetPort: 27017

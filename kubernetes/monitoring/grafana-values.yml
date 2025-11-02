@@ -1,25 +1,45 @@
 #admin:
 #  user: admin
 #  password: "Password123"
-
+#settingan user pass admin grafana (custom)
 adminUser: admin
 adminPassword: "Password123"
 
+#pengaturan service seperti jenis dan port
 service:
   type: ClusterIP
   port: 3000
 
+#pengaturan penyimpana pvc
 persistence:
-  enabled: true
-  size: 2Gi
+  enabled: true     #pengaktifkan persisten volum untuk grafana
+  size: 2Gi         #size storage
+  accessModes:
+    - ReadWriteOnce #membatasi akses volume untuk RWO untuk 1 pod saja
+  type: pvc         #jenis volum
+  existingClaim: "" #dikosongkan agar otomatis helm buat pvbc baru bila blum ada
+
+#menonaktifkan init chown data (sebelumnya ada kendala disini dimana kendala akses denied)
+#terjadi di beberapa hostpath
+initChownData:
+  enabled: false
+
+#menentukan user grup id yuang digunakan pada grafana 
+#sebelumnya sempat kendala karena jalan pada userid lain?
+securityContext:
+  runAsUser: 472
+  runAsGroup: 472
+  fsGroup: 472
+
+#datasource sementara prometheus mencoba mendifinisikan service source prometheus agar terkoneksi
 
 datasources:
   secretDefinition:
     datasources.yaml:
       apiVersion: 1
       datasources:
-        - name: Prometheus
-          type: prometheus
-          access: proxy
-          isDefault: true
-          url: http://prometheus-server.monitoring.svc.cluster.local
+        - name: Prometheus          #nama datasource
+          type: prometheus          #tipe datasource
+          access: proxy             #akses proxy
+          isDefault: true           #setelan default
+          url: http://prometheus-server.monitoring.svc.cluster.local #url internal prom service

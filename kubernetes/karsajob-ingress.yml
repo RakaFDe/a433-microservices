@@ -1,33 +1,34 @@
 apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: Ingress            #jenis service (ingress) untuk routing http https
 metadata:
-  name: karsajob-ingress
-  namespace: karsajob #karsajob #default sesuai namespace
+  name: karsajob-ingress #nama ingress
+  namespace: karsajob    #nama namespace/group karsajob #default sesuai namespace
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /  #mengatur agar seluruh path diarahkan ke root "/" pada bagian backend
 spec:
-  ingressClassName: nginx
-  rules:
-  - host: fe.rakafitrap.com
+  ingressClassName: nginx         #menggunakan nginx untuk ingress controller
+  rules:                          #daftar rules atau aturan berdasrkan alamat/host/domain
+  - host: fe.rakafitrap.com       #alamat subdomain yang di set untuk frontend
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /                  #request path pada domain fe
+        pathType: Prefix         #prefix path 
         backend:
           service:
-            name: karsajobs-ui #frontend #karsajobs-ui-service cek kubectl get sv
+            name: karsajobs-ui   #frontend #karsajobs-ui-service cek kubectl get sv
             port:
-              number: 80
-  - host: be.rakafitrap.com
+              number: 80        #port service fe(sesuai di manifest)
+  - host: be.rakafitrap.com      #alamat subdomain yang diset untuk backend
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /                  #request path pada domain be
+        pathType: Prefix         #prefix path
         backend:
           service:
-            name: karsajobs
+            name: karsajobs      #backend service cek kubectl get svc -n karsajob
             port:
               number: 80
+#coba custom path
 #      - path: /api
 #        pathType: Prefix
 #        backend:

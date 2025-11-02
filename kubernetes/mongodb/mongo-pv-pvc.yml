@@ -1,27 +1,29 @@
 ---
+#bagian pv
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolume #jenis service pv (penyimpanan permanen)
 metadata:
   name: mongo-pv
-#  namespace: karsajob
-spec:
-  storageClassName: manual #identifier storage
+#  namespace: karsajob #tidak di gunakan karena pv untuk seluruh cluster
+spec:                  #spesifikasi PV
+  storageClassName: manual #identifier storage/ nama class penyimpanan
   capacity:
-    storage: 1Gi
+    storage: 1Gi        #kapasitas 1gb
   accessModes:
-    - ReadWriteOnce
-  hostPath:
+    - ReadWriteOnce     #untuk volume agar bisa hanya bisa di readwrite oleh 1 node
+  hostPath:             #
     path: /mnt/data/db  # Path ini untuk mount
 ---
+#bagian pvc
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolumeClaim #jenis service pvc ( untuk permintaan/claim/patok)
 metadata:
-  name: mongo-pvc
-  namespace: karsajob
+  name: mongo-pvc           #nama pvc untuk pod mongo
+  namespace: karsajob       #namespace untuk pvc
 spec:
   storageClassName: manual #identifier storage
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteOnce        #mode akses yang sama dengan pv
   resources:
-    requests:
+    requests:              #permintaan resource
       storage: 1Gi

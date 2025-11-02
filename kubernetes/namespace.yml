@@ -1,3 +1,5 @@
+#berisi kumpulan namespace sebenarnya tanpa manifes
+#kubectl create namespace *nama_namespace
 apiVersion: v1
 kind: Namespace
 metadata:

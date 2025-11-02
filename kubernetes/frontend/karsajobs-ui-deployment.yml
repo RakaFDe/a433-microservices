@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: karsajobs-ui
-  namespace: karsajob
+  name: karsajobs-ui                  #nama deployment
+  namespace: karsajob                 #nama namespace/group
 spec:
-  replicas: 1
+  replicas: 1                         #jumlah replika untuk deployment
   selector:
     matchLabels:
-      app: karsajobs-ui
+      app: karsajobs-ui               #nama label yang dikelola deployment
   template:
     metadata:
       labels:
-        app: karsajobs-ui
-      annotations:
+        app: karsajobs-ui             #namalabel yang sama dengan diatas
+      annotations:                    #ini percobaan agar deployment bisa di prom(belum berhasil)
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
         prometheus.io/path: "/metrics"
     spec:
       containers:
-        - name: karsajobs-ui
-          image: ghcr.io/rakafde/karsajobs-ui:latest
-          imagePullPolicy: Always #untuk image terbaru
+        - name: karsajobs-ui                            #nama container pod
+          image: ghcr.io/rakafde/karsajobs-ui:latest    #image container yang digunakan
+          imagePullPolicy: Always                       #untuk selalu pull image terbaru
           ports:
-            - containerPort: 8000
+            - containerPort: 8000                      #port untuk aplikasi berjalan
               name: http-metrics #agar di scrape prometheus
           env:
-            - name: VUE_APP_BACKEND
+            - name: VUE_APP_BACKEND                    #env untuk alokasi koneksi deployment/service bakcend
               value: "http://be.rakafitrap.com"
 #              value: "http://rakafitrap.com/k8sapi"
 #            - name: VUE_APP_BACKEND_URL
