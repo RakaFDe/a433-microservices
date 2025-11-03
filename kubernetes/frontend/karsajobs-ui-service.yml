@@ -8,6 +8,6 @@ spec:
   selector:
     app: karsajobs-ui   #selector untuk label, cocok/sesuaikan dengan label deployment
   ports:
-    - port: 80          #port internal
+    - port: 8000          #port internal
       targetPort: 8000  #port deployment
       nodePort: 30081   #port untuk diakses dari luar cluster range 30000-32767

@@ -17,7 +17,7 @@ spec:
           service:
             name: karsajobs-ui   #frontend #karsajobs-ui-service cek kubectl get sv
             port:
-              number: 80        #port service fe(sesuai di manifest)
+              number: 8000        #port service fe(sesuai di manifest)
   - host: be.rakafitrap.com      #alamat subdomain yang diset untuk backend
     http:
       paths:
@@ -27,7 +27,7 @@ spec:
           service:
             name: karsajobs      #backend service cek kubectl get svc -n karsajob
             port:
-              number: 80
+              number: 8080
 #coba custom path
 #      - path: /api
 #        pathType: Prefix

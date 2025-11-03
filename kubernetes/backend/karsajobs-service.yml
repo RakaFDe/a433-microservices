@@ -9,7 +9,7 @@ spec:
     app: karsajobs       #selector untuk label, cocok/sesuaikan dengan label deploy,ent
   ports:
 #    - protocol: TCP
-    - port: 80         #port service internal
+    - port: 8080         #port service internal
       targetPort: 8080 #port yang dituju (port container deployment)
       nodePort: 30080  # pilih port antara 30000–32767, untuk diakses dari luar cluster
 
